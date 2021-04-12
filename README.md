@@ -2,18 +2,18 @@
 ## Goodreads Project
 
 * [Web Scraping & Analysis](https://www.notion.so/Web-Scraping-Analysis-6c2e9f1388064c8ab9e42fdf80a237db)
-* * # url - str
-* * # title - str
-* * # author - str
-* * # num_reviews - int
-* * # num_ratings - int
-* * # avg_rating - float
-* * # num_pages - int
-* * # original_publish_year - int
-* * # series - bool
-* * # genres - str
-* * # awards - str
-* * # places str
+* * url - str
+* * title - str
+* * author - str
+* * num_reviews - int
+* * num_ratings - int
+* * avg_rating - float
+* * num_pages - int
+* * original_publish_year - int
+* * series - bool
+* * genres - str
+* * awards - str
+* * places str
 
 * [Data Visualization](https://www.notion.so/Data-Visualization-e226cc8314324939a56ac84a1f457cbd)
 
