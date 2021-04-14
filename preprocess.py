@@ -1,55 +1,19 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
-
-# In[3]:
-
-
 df = pd.read_csv("testing.csv")
 df.columns
-
-
-# In[6]:
-
-
-df=df.drop(['Unnamed: 0','place', 'url'],axis = 1)
-
-
-# In[11]:
-
-
-df=df.dropna()
-
-
-# In[19]:
-
-
-df['num_pages']=pd.to_numeric(df['num_pages'],downcast='integer')
-
-
-# In[21]:
-
-
+df = df.drop(['Unnamed: 0', 'place', 'url'], axis=1)
+df = df.dropna()
+df['num_pages'] = pd.to_numeric(df['num_pages'], downcast='integer')
 df.head()
-
-
-# # 1. Min-Max normalization
-
-# In[23]:
-
-
-#Step 1: find min(avg_rating)
+# Step 1: find min(avg_rating)
 minValue = df['avg_rating'].min()
 print('Minimum rating: ', minValue)
 
-#Step2: find max(avg_rating)
+# Step2: find max(avg_rating)
 maxValue = df['avg_rating'].max()
 print('Maximum rating: ', maxValue)
 
@@ -57,17 +21,18 @@ print('Maximum rating: ', maxValue)
 # In[24]:
 
 
-#Step3 min max norm for average rating 
+# Step3 min max norm for average rating
 def minmax_norm(data_column_name):
     x = data_column_name
-    mean_norm_ratings=1+((x-x.min())/(x.max()-x.min()))*9
+    mean_norm_ratings = 1+((x-x.min())/(x.max()-x.min()))*9
     return mean_norm_ratings
 
 
 # In[37]:
 
 
-df['minmax_norm_ratings']=minmax_norm(df['avg_rating']).round(decimals=2)  # little problem
+df['minmax_norm_ratings'] = minmax_norm(
+    df['avg_rating']).round(decimals=2)  # little problem
 
 
 # In[38]:
@@ -91,14 +56,14 @@ df_mean
 
 def mean_norm(data_column_name):
     x = data_column_name
-    mean_norm_ratings=1+((x-x.mean())/(x.max()-x.min()))*9
+    mean_norm_ratings = 1+((x-x.mean())/(x.max()-x.min()))*9
     return mean_norm_ratings
 
 
 # In[41]:
 
 
-#print(type(mean_norm(cleaned["avg_rating"])))
+# print(type(mean_norm(cleaned["avg_rating"])))
 a = mean_norm(df["avg_rating"])
 a.to_frame()
 
@@ -108,7 +73,7 @@ a.to_frame()
 # In[43]:
 
 
-df['mean_norm_ratings']=mean_norm(df['avg_rating']).round(decimals=2)
+df['mean_norm_ratings'] = mean_norm(df['avg_rating']).round(decimals=2)
 
 
 # In[102]:
@@ -121,7 +86,7 @@ df.head()
 
 
 cols = df.columns.tolist()
-cols=cols[:8]+cols[-2:]+cols[8:-2]
+cols = cols[:8]+cols[-2:]+cols[8:-2]
 df = df[cols]
 
 
@@ -149,7 +114,8 @@ df.to_csv('preprocess_data.csv')
 # In[62]:
 
 
-anay_goup = df.groupby("original_publish_year")['minmax_norm_ratings'].mean().round(decimals=2)
+anay_goup = df.groupby("original_publish_year")[
+    'minmax_norm_ratings'].mean().round(decimals=2)
 
 
 # In[63]:
@@ -169,17 +135,16 @@ anay_goup.to_frame()
 # In[99]:
 
 
-def  get_book_author(name,df):
-    f=df[df.loc[:,'author'] == name]
-    m=f['minmax_norm_ratings'].max()
+def get_book_author(name, df):
+    f = df[df.loc[:, 'author'] == name]
+    m = f['minmax_norm_ratings'].max()
     return m
-
 
 
 # In[100]:
 
 
-get_book_author('Cassandra Clare',df)
+get_book_author('Cassandra Clare', df)
 
 
 # <a style='text-decoration:none;line-height:16px;display:flex;color:#5B5B62;padding:10px;justify-content:end;' href='https://deepnote.com?utm_source=created-in-deepnote-cell&projectId=8aa7b630-9ed2-4356-9070-0a10a3a5f060' target="_blank">
