@@ -31,7 +31,7 @@ df['minmax_norm_ratings'] = minmax_norm(
     df['avg_rating']).round(decimals=2)  # little problem
 
 df.head()
-
+# sdhhs
 # # Mean normalization
 #Step1 : average (avg_rating)
 df_mean = df[["avg_rating"]].mean()
