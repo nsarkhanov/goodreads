@@ -2,7 +2,7 @@ import requests as rq
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
-import scrapper
+import scraper
 
 page_html = rq.get(
     "https://www.goodreads.com//book/show/1582996.City_of_Ashes")
